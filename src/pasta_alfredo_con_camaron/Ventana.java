@@ -3,7 +3,10 @@ package pasta_alfredo_con_camaron;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -39,6 +42,17 @@ public class Ventana extends JFrame{
 		//this.setOpacity(1);
 		this.getContentPane().setBackground(Color.black);
 		//this.setBounds(200,200,500,500);
+		
+		
+		try {
+			Image iconImage	= ImageIO.read(getClass().getResource("/images/Agumon_Black_X.png"));
+			this.setIconImage(iconImage);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		
 		JMenuBar barra = new JMenuBar();
 		
