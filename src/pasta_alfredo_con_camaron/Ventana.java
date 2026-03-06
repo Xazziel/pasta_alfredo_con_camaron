@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -30,7 +31,7 @@ public class Ventana extends JFrame{
 		
 		//CONFIGURACIONES BÁSICAS
 		this.setVisible(true);
-		this.setSize(1000, 600);
+		this.setSize(1000, 800);
 		//this.setLocation(200, 200);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setMinimumSize(new Dimension(200,200));
@@ -81,7 +82,8 @@ public class Ventana extends JFrame{
 		
 		//this.login();
 		//this.registro();
-		this.users();
+		//this.users();
+		this.calculadora();
 		this.setVisible(true);
 		this.repaint();
 		
@@ -241,6 +243,40 @@ public class Ventana extends JFrame{
 		panel_users.add(final_table);
 		
 		panel_users.repaint();
+	}
+	
+	public void calculadora() {
+		JPanel panel_users = new JPanel();
+		panel_users.setBounds(250, 50, 500, 900);
+		panel_users.setBackground(Color.decode("#847fff"));
+		panel_users.setLayout(null);
+		this.add(panel_users);
+		
+		JLabel field = new JLabel("180.00");
+		field.setBounds(10,10,480,40);
+		field.setOpaque(true);
+		field.setBackground(Color.white);
+		field.setFont(new Font("Arial",Font.BOLD,22));
+		field.setBorder(BorderFactory.createEmptyBorder(10,20,10,20));
+		panel_users.add(field);
+		
+		int cor_x = 30,cor_y = 60;
+		String [] botones= {"CE","","","","7","8","9","/","4","5","6","*","1","2","3","-","0",".","=","+"};
+		
+		for(int i = 0;i<20;i++)
+		{
+			JButton ce = new JButton(botones[i]);
+			ce.setSize(100,100);
+			ce.setLocation(cor_x,cor_y);
+			
+			cor_x +=110;
+			panel_users.add(ce);
+			
+			if(cor_x>=420) {
+				cor_x=30;
+				cor_y+=110;
+			}
+		}
 	}
 	
 }
