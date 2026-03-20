@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -62,7 +64,26 @@ public class Ventana extends JFrame{
 		JMenu menu1 = new JMenu("Archivo");
 		barra.add(menu1);
 		
+		JMenu menu3 = new JMenu("usuario");
+		barra.add(menu3);
 		
+		JMenuItem optregis_mi = new JMenuItem("Registro");
+		
+		optregis_mi.addActionListener(e ->{
+			
+			this.router("registro");
+			
+		});
+		
+		
+		JMenuItem optlog_mi = new JMenuItem("Ingresar");
+		optlog_mi.addActionListener(e ->{
+			
+			this.router("login");
+			
+		});
+		menu3.add(optregis_mi);
+		menu3.add(optlog_mi);
 		JMenuItem opt1_mi = new JMenuItem("Abrir");
 		menu1.add(opt1_mi);
 		JMenuItem opt2_mi = new JMenuItem("Cerrar");
@@ -83,10 +104,25 @@ public class Ventana extends JFrame{
 		//this.login();
 		//this.registro();
 		//this.users();
-		this.calculadora();
+		this.router("login");
 		this.setVisible(true);
 		this.repaint();
 		
+	}
+	
+	public void router(String target) {
+		this.getContentPane().removeAll();
+		
+		if(target.equals("login")) {
+			this.login();
+		}
+		
+		if(target.equals("registro")) {
+			this.registro();
+		}
+		
+		this.repaint();
+		this.revalidate();
 	}
 	
 	public void login()
@@ -143,6 +179,22 @@ public class Ventana extends JFrame{
 		access_btn.setBounds(100, 350, 200, 40);
 		access_btn.setFont(new Font("Arial",Font.ITALIC,18));
 		login_container.add(access_btn);
+		
+		access_btn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				String email = email_input.getText();
+				if(email.equals("") )
+				{
+					System.out.println("Vacio");
+					
+					email_input.setBorder(BorderFactory.createLineBorder(Color.red,3));
+				}else
+					email_input.setBorder(BorderFactory.createLineBorder(Color.green,3));
+				System.out.println();
+			}});
 	}
 	
 	public void registro() {
@@ -245,38 +297,6 @@ public class Ventana extends JFrame{
 		panel_users.repaint();
 	}
 	
-	public void calculadora() {
-		JPanel panel_users = new JPanel();
-		panel_users.setBounds(250, 50, 500, 900);
-		panel_users.setBackground(Color.decode("#847fff"));
-		panel_users.setLayout(null);
-		this.add(panel_users);
-		
-		JLabel field = new JLabel("180.00");
-		field.setBounds(10,10,480,40);
-		field.setOpaque(true);
-		field.setBackground(Color.white);
-		field.setFont(new Font("Arial",Font.BOLD,22));
-		field.setBorder(BorderFactory.createEmptyBorder(10,20,10,20));
-		panel_users.add(field);
-		
-		int cor_x = 30,cor_y = 60;
-		String [] botones= {"CE","","","","7","8","9","/","4","5","6","*","1","2","3","-","0",".","=","+"};
-		
-		for(int i = 0;i<20;i++)
-		{
-			JButton ce = new JButton(botones[i]);
-			ce.setSize(100,100);
-			ce.setLocation(cor_x,cor_y);
-			
-			cor_x +=110;
-			panel_users.add(ce);
-			
-			if(cor_x>=420) {
-				cor_x=30;
-				cor_y+=110;
-			}
-		}
-	}
+
 	
 }
